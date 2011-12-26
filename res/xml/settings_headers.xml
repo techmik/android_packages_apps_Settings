@@ -60,6 +60,13 @@
     <!-- CYANOGENMOD -->
     <header android:title="@string/header_category_cyanogenmod" />
 
+    <!-- CM settings -->
+    <header
+        android:id="@+id/cm_settings"
+        android:title="@string/cm_settings_title"
+        android:fragment="TODO"
+        android:icon="@drawable/ic_settings_cmlauncher" />
+
     <!-- Launcher settings -->
     <header
         android:id="@+id/launcher_settings"
