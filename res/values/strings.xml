@@ -488,9 +488,6 @@
     <!-- Band mode screen. Statusm essage when successful. -->
     <string name="band_mode_succeeded">Successful</string>
 
-    <!-- CyanogenMod Settings -->
-    <string name="cm_settings_title">CyanogenMod Settings</string>
-
     <!-- Launcher settings -->
     <string name="launcher_settings_title">Trebuchet</string>
 
