@@ -93,6 +93,17 @@
             android:targetClass="com.cyanogenmod.settings.device.DeviceSettings" />
     </header>
 
+    <!-- Aries parts -->
+    <header
+        android:id="@+id/aries_parts"
+        android:title="@string/aries_parts_title"
+        android:icon="@drawable/ic_settings_cmsettings">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.aries.parts"
+            android:targetClass="com.ariesparts.settings.Settings" />
+    </header>
+
     <!-- DEVICE -->
     <header android:title="@string/header_category_device" />
 
