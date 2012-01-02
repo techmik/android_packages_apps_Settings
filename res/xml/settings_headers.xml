@@ -60,6 +60,17 @@
     <!-- CYANOGENMOD -->
     <header android:title="@string/header_category_cyanogenmod" />
 
+    <!-- CM settings -->
+    <header
+        android:id="@+id/cm_settings"
+        android:title="@string/cm_settings_title"
+        android:icon="@drawable/ic_settings_cmsettings">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.cyanogenmod.settings"
+            android:targetClass="com.cyanogenmod.settings.SlideSettings" />
+    </header>
+
     <!-- Launcher settings -->
     <header
         android:id="@+id/launcher_settings"
