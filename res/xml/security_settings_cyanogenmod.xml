@@ -31,6 +31,12 @@
             android:title="@string/unlock_quick_unlock_control_title"
             android:summary="@string/unlock_quick_unlock_control_summary" />
 
+        <CheckBoxPreference
+            android:persistent="false"
+            android:key="autorotate_lockscreen"
+            android:title="@string/autorotate_lockscreen_control_title"
+            android:summary="@string/autorotate_lockscreen_control_summary" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
