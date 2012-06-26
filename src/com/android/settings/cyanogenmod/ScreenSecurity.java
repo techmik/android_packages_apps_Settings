@@ -75,6 +75,8 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
 
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "quick_unlock_control";
 
+    private static final String AUTOROTATE_LOCKSCREEN = "autorotate_lockscreen";
+
     private static final String KEY_LOCK_BEFORE_UNLOCK = "lock_before_unlock";
 
     private LockPatternUtils mLockPatternUtils;
@@ -100,6 +102,8 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
     private CheckBoxPreference mMenuUnlock;
 
     private CheckBoxPreference mQuickUnlockScreen;
+
+    private CheckBoxPreference mAutorotateLockscreen;
 
     boolean mHasNavigationBar = false;
 
@@ -187,6 +191,15 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
             mSlideLockScreenOffDelay.setValue(String.valueOf(slideScreenOffDelay));
             updateSlideAfterScreenOffSummary();
             mSlideLockScreenOffDelay.setOnPreferenceChangeListener(this);
+
+            mAutorotateLockscreen = (CheckBoxPreference) root
+                    .findPreference(AUTOROTATE_LOCKSCREEN);
+            mAutorotateLockscreen.setChecked(Settings.System.getInt(getActivity()
+                    .getApplicationContext().getContentResolver(),
+                    Settings.System.AUTOROTATE_LOCKSCREEN, 0) == 1);
+            updateAutorotateLockscreen();
+            mAutorotateLockscreen.setOnPreferenceChangeListener(this);
+
         }
 
         // visible pattern
@@ -233,6 +246,13 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
         mMenuUnlock.setChecked(Settings.System.getInt(getActivity().getApplicationContext()
                 .getContentResolver(),
                 Settings.System.MENU_UNLOCK_SCREEN, 0) == 1);
+
+        // Autorotate Lockscreen
+        mAutorotateLockscreen = (CheckBoxPreference) root
+                .findPreference(AUTOROTATE_LOCKSCREEN);
+        mAutorotateLockscreen.setChecked(Settings.System.getInt(getActivity()
+                .getApplicationContext().getContentResolver(),
+                Settings.System.AUTOROTATE_LOCKSCREEN, 0) == 1);
 
         // disable lock options if lock screen set to NONE
         if (!mLockPatternUtils.isSecure() && mLockPatternUtils.isLockScreenDisabled()) {
@@ -321,6 +341,10 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
         }
         mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
     }
+
+//    private void updateAutorotateLockscreenCheckbox() {
+//        
+//    }
 
     private void checkPowerInstantLockDependency() {
         if (mPowerButtonInstantlyLocks != null) {
@@ -421,6 +445,10 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
             value = mQuickUnlockScreen.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, value ? 1 : 0);
+        } else if (preference == mAutorotateLockscreen) {
+            value = mAutorotateLockscreen.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.AUTOROTATE_LOCKSCREEN, value ? 1 : 0);
         } else if (preference == mMenuUnlock) {
             value = mMenuUnlock.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
@@ -473,8 +501,9 @@ public class ScreenSecurity extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, slideScreenOffDelay);
             updateSlideAfterScreenOffSummary();
+        } else if (preference == mAutorotateLockscreen) {
+            updateAutorotateLockscreen;
         }
-
         return true;
     }
 
